@@ -21,21 +21,21 @@
     },
     {
       "id": 2,
-      "title": "p50 / p95 / p99 Latency by Endpoint",
+      "title": "p50 / p95 / p99 Latency (System-wide)",
       "type": "timeseries",
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
       "targets": [
         {
-          "expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket[1m])) by (le, handler))",
-          "legendFormat": "p50 {{handler}}"
+          "expr": "histogram_quantile(0.50, sum(rate(http_request_duration_seconds_bucket[1m])) by (le))",
+          "legendFormat": "p50"
         },
         {
-          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[1m])) by (le, handler))",
-          "legendFormat": "p95 {{handler}}"
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[1m])) by (le))",
+          "legendFormat": "p95"
         },
         {
-          "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[1m])) by (le, handler))",
-          "legendFormat": "p99 {{handler}}"
+          "expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[1m])) by (le))",
+          "legendFormat": "p99"
         }
       ],
       "fieldConfig": {
@@ -57,13 +57,13 @@
     },
     {
       "id": 4,
-      "title": "In-Progress Requests",
+      "title": "Process Memory Usage (MB)",
       "type": "timeseries",
       "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
       "targets": [
         {
-          "expr": "http_requests_inprogress",
-          "legendFormat": "in-progress"
+          "expr": "process_resident_memory_bytes / 1024 / 1024",
+          "legendFormat": "memory (MB)"
         }
       ]
     }
